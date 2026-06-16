@@ -1,0 +1,68 @@
+.volunteer-section {
+  margin-bottom: 56px;
+
+  > p {
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+}
+
+.agreement-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-left: 4px solid var(--scout-navy);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 32px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  p {
+    color: var(--text-mid);
+    line-height: 1.85;
+    font-size: 1rem;
+
+    strong { color: var(--text-dark); }
+  }
+}
+
+.role-chip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+}
+
+.chip-icon { font-size: 1.4rem; flex-shrink: 0; }
+
+.chip-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--scout-navy);
+}
+
+.form-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  margin-top: 8px;
+}
+
+.form-btn {
+  font-size: 1rem;
+  padding: 14px 28px;
+}
+
+.form-note {
+  font-size: 0.85rem;
+  color: var(--text-light);
+
+  a {
+    color: var(--scout-navy);
+    font-weight: 600;
+  }
+}

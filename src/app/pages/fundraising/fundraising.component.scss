@@ -1,0 +1,14 @@
+.info-section {
+  margin-bottom: 56px;
+
+  p { color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; }
+}
+
+.fundraiser-card {
+  text-align: center;
+
+  .fundraiser-icon { font-size: 2rem; margin-bottom: 12px; }
+
+  h3 { color: var(--scout-navy); margin-bottom: 8px; }
+  p  { color: var(--text-mid); font-size: 0.9rem; }
+}

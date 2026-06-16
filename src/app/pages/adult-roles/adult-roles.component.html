@@ -1,0 +1,117 @@
+<div class="page-hero">
+  <h1>Adult Roles</h1>
+  <p>Pack 541 runs on parent volunteers. Every contribution — big or small — makes scouting possible.</p>
+</div>
+
+<div class="page-content">
+
+  @if (loading) {
+    <div class="loading-state">Loading roles…</div>
+  }
+
+  @if (error) {
+    <div class="error-state">
+      Unable to load role information right now. Please try again later or contact
+      <a href="mailto:info@pack541.org">info&#64;pack541.org</a>.
+    </div>
+  }
+
+  @if (!loading && !error) {
+
+    @if (leadershipCards.length) {
+      <section class="info-section">
+        <h2 class="section-title">Leadership</h2>
+        <p>Our adult leaders hold official BSA positions and complete required training. No prior scouting experience needed — just a willingness to help.</p>
+        <div class="card-grid">
+          @for (card of leadershipCards; track card.title) {
+            <div class="card role-card">
+              <div class="role-icon">{{ card.icon }}</div>
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.description }}</p>
+              <button class="role-btn" (click)="openModal(card)">
+                Who fills this role
+              </button>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    @if (volunteerCards.length) {
+      <section class="info-section">
+        <h2 class="section-title">Volunteer Roles</h2>
+        <p>Beyond formal leadership positions, these roles keep the pack organized and connected day-to-day.</p>
+        <div class="card-grid">
+          @for (card of volunteerCards; track card.title) {
+            <div class="card role-card">
+              <div class="role-icon">{{ card.icon }}</div>
+              <h3>{{ card.title }}</h3>
+              <p>{{ card.description }}</p>
+              <button class="role-btn" (click)="openModal(card)">
+                Who fills this role
+              </button>
+            </div>
+          }
+        </div>
+      </section>
+    }
+
+    <section id="training" class="info-section">
+      <h2 class="section-title">Training</h2>
+      <p>All registered leaders are encouraged (and some are required) to complete BSA training to ensure a safe, fun, and effective scouting experience.</p>
+      <ul class="info-list">
+        <li><strong>Youth Protection Training (YPT)</strong> — required for all registered adults, renewed every 2 years</li>
+        <li><strong>Position-Specific Training</strong> — online modules for your specific role</li>
+        <li><strong>BALOO</strong> — required for pack-level camping events</li>
+        <li><strong>Outdoor Leader Skills</strong> — recommended for den leaders</li>
+      </ul>
+      <p class="info-note">All training is available online at my.scouting.org. Contact the Cubmaster for assistance.</p>
+    </section>
+
+  }
+
+</div>
+
+@if (activeModal) {
+  <div class="modal-overlay" (click)="closeModal()" role="dialog" aria-modal="true" [attr.aria-label]="activeModal.title">
+    <div class="modal-panel" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="closeModal()" aria-label="Close">✕</button>
+      <h2 class="modal-title">{{ activeModal.title }}</h2>
+
+      @if (activeModal.isDenLeader) {
+        <div class="den-list">
+          @for (entry of activeModal.entries; track entry.label) {
+            <div class="den-row">
+              <span class="den-label">{{ entry.label }}</span>
+              @if (entry.name) {
+                <span class="den-name">{{ entry.name }}</span>
+              } @else {
+                <span class="vacant">Open — volunteer needed</span>
+              }
+              @if (entry.notes) {
+                <p class="entry-notes">{{ entry.notes }}</p>
+              }
+            </div>
+          }
+        </div>
+      } @else {
+        @for (entry of activeModal.entries; track $index) {
+          <div class="regular-entry">
+            @if (entry.name) {
+              <p class="entry-name">{{ entry.name }}</p>
+            } @else {
+              <span class="vacant">Open — volunteer needed</span>
+            }
+            @if (entry.notes) {
+              <p class="entry-notes">{{ entry.notes }}</p>
+            }
+          </div>
+        }
+      }
+
+      <div class="modal-footer">
+        <p>Interested in this role? Reach out at <a href="mailto:info@pack541.org">info&#64;pack541.org</a></p>
+      </div>
+    </div>
+  </div>
+}

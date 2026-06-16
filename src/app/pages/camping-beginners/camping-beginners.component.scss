@@ -1,0 +1,474 @@
+/* Tab selector row */
+.tab-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 40px;
+
+  @media (max-width: 600px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tab-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 24px 16px;
+  border-radius: var(--radius);
+  border: 2px solid var(--border-light);
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s, transform 0.2s;
+
+  &:hover:not(.active) {
+    border-color: var(--scout-navy);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
+  }
+
+  &.active {
+    border-color: var(--scout-navy);
+    background: var(--scout-navy);
+    box-shadow: var(--shadow-md);
+
+    .tab-label { color: white; }
+    .tab-icon  { filter: brightness(1.2); }
+  }
+}
+
+.tab-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.tab-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--scout-navy);
+  transition: color 0.2s;
+}
+
+/* Tab content panel */
+.tab-content {
+  animation: fadeIn 0.2s ease;
+
+  > p {
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Cooking sub-sections */
+.cooking-section {
+  margin-bottom: 52px;
+
+  .cooking-intro {
+    color: var(--text-mid);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+}
+
+/* Recipe cards */
+.recipe-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.recipe-card {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.recipe-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--border-light);
+
+  h3 {
+    font-size: 1.1rem;
+    color: var(--scout-navy);
+    margin-bottom: 6px;
+  }
+}
+
+.recipe-note {
+  color: var(--text-mid);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  max-width: 680px;
+}
+
+.difficulty {
+  flex-shrink: 0;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+
+  &.easy    { background: #e6f4ea; color: #2d7a3a; }
+  &.easiest { background: #d4edda; color: #155724; }
+  &.moderate{ background: #fff3cd; color: #856404; }
+}
+
+.recipe-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0;
+
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.recipe-col {
+  padding: 20px 24px;
+  border-right: 1px solid var(--border-light);
+
+  &:last-child { border-right: none; }
+
+  h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--scout-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+}
+
+.ingredients-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+
+.serves-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  background: rgba(0, 63, 135, 0.08);
+  color: var(--scout-navy);
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.recipe-tips {
+  padding: 16px 24px 20px;
+  background: var(--bg-light);
+  border-top: 1px solid var(--border-light);
+
+  h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--scout-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+}
+
+.instructions-list {
+  list-style: none;
+  counter-reset: steps;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  li {
+    counter-increment: steps;
+    display: flex;
+    gap: 12px;
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    line-height: 1.6;
+
+    &::before {
+      content: counter(steps);
+      min-width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--scout-navy);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+  }
+}
+
+/* Detailed gear guide */
+.gear-guide {
+  margin-top: 16px;
+}
+
+.gear-intro {
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+/* Accordion */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 28px;
+}
+
+.accordion-item {
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: white;
+}
+
+.accordion-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  background: white;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-dark);
+  transition: background 0.15s;
+
+  &:hover { background: var(--bg-light); }
+
+  &.open {
+    background: var(--scout-navy);
+    color: white;
+
+    .accordion-chevron { transform: rotate(180deg); stroke: white; }
+  }
+
+  span:not(.accordion-icon) { flex: 1; }
+}
+
+.accordion-icon { font-size: 1.3rem; flex-shrink: 0; }
+
+.accordion-chevron {
+  width: 14px;
+  height: 9px;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+  stroke: var(--text-dark);
+}
+
+.accordion-body {
+  padding: 24px;
+  border-top: 1px solid var(--border-light);
+  animation: fadeIn 0.18s ease;
+}
+
+.accordion-text {
+  color: var(--text-mid);
+  line-height: 1.8;
+  margin-bottom: 16px;
+  font-size: 0.92rem;
+}
+
+/* Gear item rows (with price) */
+.gear-item-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.gear-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 11px 16px;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+
+  &:last-child { border-bottom: none; }
+  &:nth-child(even) { background: var(--bg-light); }
+}
+
+.gear-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.875rem;
+  color: var(--scout-navy);
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.gear-detail {
+  font-size: 0.875rem;
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+
+.price {
+  font-weight: 700;
+  color: #2d7a3a;
+}
+
+/* Gear sub-sections (within accordion body) */
+.gear-sub-section {
+  margin-top: 20px;
+
+  h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--scout-navy);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 10px;
+  }
+}
+
+/* Tent cards */
+.tent-card {
+  background: var(--bg-light);
+  border-left: 3px solid var(--scout-navy);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+
+  h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--scout-navy);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  p {
+    color: var(--text-mid);
+    font-size: 0.875rem;
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+}
+
+.tent-badge {
+  display: inline-block;
+  padding: 2px 10px;
+  background: rgba(0, 63, 135, 0.1);
+  color: var(--scout-navy);
+  border-radius: 10px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/* Gear grid */
+.gear-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.gear-group {
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  padding: 20px;
+
+  h4 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: var(--scout-navy);
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+  }
+}
+
+/* Agenda */
+.agenda-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.agenda-item {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 16px;
+  background: white;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+}
+
+.agenda-time {
+  background: var(--scout-navy);
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  text-align: center;
+}
+
+.agenda-events {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.agenda-event {
+  color: var(--text-mid);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}

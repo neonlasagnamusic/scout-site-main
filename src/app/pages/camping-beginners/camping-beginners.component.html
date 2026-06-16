@@ -1,0 +1,491 @@
+<div class="page-hero">
+  <h1>Camping for Beginners</h1>
+  <p>Never camped before? No problem. Here's everything you need to know to have a great time.</p>
+</div>
+
+<div class="page-content">
+
+  <!-- Tab selectors -->
+  <div class="tab-row">
+    @for (tab of tabs; track tab.id) {
+      <button
+        class="tab-box"
+        [class.active]="activeTab() === tab.id"
+        (click)="setTab(tab.id)">
+        <span class="tab-icon">{{ tab.icon }}</span>
+        <span class="tab-label">{{ tab.label }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- ── Camp Cooking ── -->
+  @if (activeTab() === 'cooking') {
+    <section class="tab-content">
+
+      <!-- Cooking for Groups -->
+      <div class="cooking-section">
+        <h2 class="section-title">Cooking for Groups</h2>
+        <p class="cooking-intro">Suggested recipes scaled for feeding the whole pack. Each option includes prep tips and serving guidance.</p>
+
+        <div class="recipe-list">
+
+          <!-- Hot Dogs -->
+          <div class="recipe-card">
+            <div class="recipe-header">
+              <div>
+                <h3>Hot Dogs</h3>
+                <p class="recipe-note">Easy to portion, cook, and serve. Vegetarian options vary — some are better than others and may need testing beforehand.</p>
+              </div>
+              <span class="difficulty easy">Easy</span>
+            </div>
+            <div class="recipe-body">
+              <div class="recipe-col">
+                <h4>How to Cook</h4>
+                <ul class="info-list">
+                  <li>Boil hot dogs in large pot of water</li>
+                  <li>Or grill over campfire grate</li>
+                </ul>
+              </div>
+              <div class="recipe-col">
+                <h4>Condiments</h4>
+                <ul class="info-list">
+                  <li>Ketchup</li>
+                  <li>Mustard</li>
+                  <li>Relish</li>
+                  <li>Onions</li>
+                  <li>Chili</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pasta Bar -->
+          <div class="recipe-card">
+            <div class="recipe-header">
+              <div>
+                <h3>Pasta Bar</h3>
+                <p class="recipe-note">Harder to portion but easy to serve. Cook pasta ahead of time and chill in cooler. Dip in hot water to warm at camp.</p>
+              </div>
+              <span class="difficulty moderate">Moderate</span>
+            </div>
+            <div class="recipe-body">
+              <div class="recipe-col">
+                <h4>Sauce Options</h4>
+                <ul class="info-list">
+                  <li>Thai Peanut Sauce</li>
+                  <li>Meat Sauce</li>
+                  <li>Alfredo</li>
+                  <li>Pesto</li>
+                </ul>
+              </div>
+              <div class="recipe-col">
+                <h4>Serving Sizes</h4>
+                <ul class="info-list">
+                  <li>2 oz dry spaghetti per person</li>
+                  <li>½ cup (4 oz) sauce per person</li>
+                </ul>
+              </div>
+            </div>
+            <div class="recipe-tips">
+              <h4>Camping Tips</h4>
+              <ul class="info-list">
+                <li>Precook spaghetti, rinse well, toss with olive oil — reheat in boiling water for 45 seconds at camp</li>
+                <li>Use precooked frozen meatballs: boil in a food-safe bag for 20 minutes, or simmer in sauce for 20 minutes</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Taco Bar -->
+          <div class="recipe-card">
+            <div class="recipe-header">
+              <div>
+                <h3>Taco Bar</h3>
+                <p class="recipe-note">Easy to portion, cook meat ahead of time, easy to serve. Reheat meat with an immersion cooker and large tub. Use diced baked tofu as a beef alternative.</p>
+              </div>
+              <span class="difficulty easy">Easy</span>
+            </div>
+            <div class="recipe-body">
+              <div class="recipe-col">
+                <h4>Crockpot Taco Meat <span class="serves-badge">Serves 40</span></h4>
+                <p class="ingredients-label">Ingredients</p>
+                <ul class="info-list">
+                  <li>5 lbs lean ground beef <em>or</em> baked tofu</li>
+                  <li>2 tbsp garlic powder</li>
+                  <li>1 cup taco seasoning</li>
+                  <li>1 liter water</li>
+                  <li>40 corn or flour tortillas</li>
+                </ul>
+              </div>
+              <div class="recipe-col">
+                <h4>Condiments</h4>
+                <ul class="info-list">
+                  <li>2 heads of lettuce</li>
+                  <li>1 yellow onion</li>
+                  <li>1 bundle cilantro</li>
+                  <li>24 oz salsa</li>
+                  <li>1 bottle hot sauce</li>
+                </ul>
+              </div>
+            </div>
+            <div class="recipe-tips">
+              <h4>Instructions</h4>
+              <ol class="instructions-list">
+                <li>Place ground beef into slow cooker. Top with taco seasoning, garlic powder, and salsa.</li>
+                <li>Cover and cook on <strong>low for 6 hours</strong> or <strong>high for 3 hours</strong>.</li>
+                <li>When finished, drain any liquid and break up beef with a fork as desired.</li>
+                <li>Serve with corn or flour tortillas and condiments.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Sandwiches & Veggie Chili -->
+          <div class="recipe-card">
+            <div class="recipe-header">
+              <div>
+                <h3>Sandwiches &amp; Vegetarian Chili</h3>
+                <p class="recipe-note">Easiest option to prep and serve. Great pairing for a laid-back lunch or dinner.</p>
+              </div>
+              <span class="difficulty easiest">Easiest</span>
+            </div>
+            <div class="recipe-body">
+              <div class="recipe-col">
+                <h4>Sandwiches</h4>
+                <ul class="info-list">
+                  <li>1 loaf of bread <em>(feeds ~20)</em></li>
+                  <li>3-pack Costco turkey <em>(feeds ~21)</em></li>
+                  <li>Tomato <em>(feeds ~6 per tomato)</em></li>
+                  <li>Onion <em>(feeds ~15 per onion)</em></li>
+                </ul>
+              </div>
+              <div class="recipe-col">
+                <h4>Vegetarian Chili <span class="serves-badge">9 Servings</span></h4>
+                <ul class="info-list">
+                  <li>2 cans (16 oz) chili beans</li>
+                  <li>2 garlic cloves</li>
+                  <li>½ cup chopped sun-dried tomatoes</li>
+                  <li>2 cans diced tomatoes</li>
+                  <li>4 tsp chili powder</li>
+                  <li>1 medium onion, finely chopped</li>
+                  <li>1 cup baby portobello mushrooms</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /recipe-list -->
+      </div><!-- /cooking-section -->
+
+      <!-- Other Meal Suggestions -->
+      <div class="cooking-section">
+        <h2 class="section-title">Other Meal Suggestions</h2>
+        <p class="cooking-intro">Quick ideas for every part of the day — no recipes required.</p>
+        <div class="card-grid">
+          <div class="card">
+            <h3>Breakfast</h3>
+            <ul class="info-list">
+              <li>Scrambled eggs and bacon on the camp stove</li>
+              <li>Foil packets with eggs, potatoes, and veggies</li>
+              <li>Instant oatmeal or granola bars for quick mornings</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Lunch</h3>
+            <ul class="info-list">
+              <li>Sandwiches and wraps (no cooking required)</li>
+              <li>Hot dogs or sausages over the fire</li>
+              <li>PB&amp;J is always a winner with kids</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Dinner</h3>
+            <ul class="info-list">
+              <li>Foil packet meals (meat + veggies, cooked in coals)</li>
+              <li>Dutch oven chili or stew</li>
+              <li>Hamburgers or hot dogs on the grill grate</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Dessert</h3>
+            <ul class="info-list">
+              <li>S'mores — a scouting tradition!</li>
+              <li>Banana boats: banana + chocolate chips in foil</li>
+              <li>Dutch oven cobblers (pack leader favorite)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </section>
+  }
+
+  <!-- ── Gear ── -->
+  @if (activeTab() === 'gear') {
+    <section class="tab-content">
+
+      <!-- Quick checklist -->
+      <h2 class="section-title">Gear</h2>
+      <p>You don't need expensive gear for a great campout. Here's a practical beginner checklist.</p>
+      <div class="gear-grid">
+        <div class="gear-group">
+          <h4>Sleeping</h4>
+          <ul class="info-list">
+            <li>Tent (2–3 person for a family of 3–4)</li>
+            <li>Sleeping bag rated to 30–40°F</li>
+            <li>Sleeping pad or air mattress</li>
+            <li>Pillow (camp or from home)</li>
+          </ul>
+        </div>
+        <div class="gear-group">
+          <h4>Clothing (Per Person)</h4>
+          <ul class="info-list">
+            <li>Layers — mornings and evenings get cold</li>
+            <li>Rain jacket or poncho</li>
+            <li>Sturdy closed-toe shoes or hiking boots</li>
+            <li>Hat for sun protection</li>
+          </ul>
+        </div>
+        <div class="gear-group">
+          <h4>Cooking</h4>
+          <ul class="info-list">
+            <li>Camp stove + fuel canister (or shared)</li>
+            <li>Pots, pans, utensils</li>
+            <li>Plates, bowls, cups (bring reusable or use paper)</li>
+            <li>Firestarter, lighter or matches</li>
+          </ul>
+        </div>
+        <div class="gear-group">
+          <h4>Essentials</h4>
+          <ul class="info-list">
+            <li>First aid kit</li>
+            <li>Sunscreen and bug spray</li>
+            <li>Headlamp or flashlight</li>
+            <li>Water bottles (at least 1 per person)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Detailed gear guide -->
+      <div class="gear-guide">
+        <h2 class="section-title" style="margin-top: 48px;">Camping Gear for First-Time Families</h2>
+        <p class="gear-intro">
+          Camping your first time can be scary to prepare for, but with a few tips, trial and error
+          on what works for you and your family, it can be pretty easy.
+        </p>
+        <p class="gear-intro">
+          These recommendations are for the Scouting family that believes they will be an active
+          participant and eventually transition from Cub Scouts to Boy Scouts. The goals are to
+          minimize cost and minimize redundant gear across multiple use cases. Better gear that lasts
+          longer is recommended where it counts.
+        </p>
+
+        <!-- Accordion sections -->
+        <div class="accordion">
+
+          <!-- Family / Car Campout -->
+          <div class="accordion-item">
+            <button class="accordion-trigger" (click)="toggleSection('family')" [class.open]="isOpen('family')">
+              <span class="accordion-icon">🚗</span>
+              <span>Family / Car Campout Gear</span>
+              <svg class="accordion-chevron" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            @if (isOpen('family')) {
+              <div class="accordion-body">
+                <div class="gear-item-list">
+                  <div class="gear-row"><span class="gear-name">Tent</span><span class="gear-detail">6+ person = <span class="price">$150–$500</span> &nbsp;|&nbsp; 4 person = <span class="price">$50–$150</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Lighting</span><span class="gear-detail">Headlamps + lightweight lantern &nbsp;<span class="price">$10–$50</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Sleeping Bag</span><span class="gear-detail">2 lbs, 20°, synthetic or water-resistant down &nbsp;<span class="price">$100–$400</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Sleeping Bag Liner</span><span class="gear-detail">8 oz &nbsp;<span class="price">$25–$60</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Chair</span><span class="gear-detail">2 lbs backpacking chair &nbsp;<span class="price">$30–$150</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Table</span><span class="gear-detail">Any folding table that fits in your car &nbsp;<span class="price">$30–$250</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Mess Kit</span><span class="gear-detail">Lightweight cup + Sea-To-Summit Summit Bowl XL + GSI Outdoors Spoon + fork &nbsp;<span class="price">~$40</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Knife</span><span class="gear-detail">Multitool &nbsp;<span class="price">$40–$100</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Water Bottles</span><span class="gear-detail">1 liter, BPA-free plastic &nbsp;<span class="price">$8–$20</span></span></div>
+                </div>
+
+                <div class="gear-sub-section">
+                  <h4>Cooking</h4>
+                  <ul class="info-list">
+                    <li>Stove — 8,000 BTU</li>
+                    <li>3–5 liter pot</li>
+                    <li>Frying pan</li>
+                    <li>Spatula &amp; serving spoon</li>
+                    <li>Cutting board &amp; kitchen knife</li>
+                  </ul>
+                </div>
+
+                <div class="gear-sub-section">
+                  <h4>Cleaning (KP)</h4>
+                  <ul class="info-list">
+                    <li>Bleach — for the 3rd step of KP</li>
+                    <li>Dish soap — for the 2nd step of KP</li>
+                    <li>3 wash buckets for steps 1–3 of KP</li>
+                    <li>Sponge</li>
+                    <li>Drying rags</li>
+                  </ul>
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- Backpacking -->
+          <div class="accordion-item">
+            <button class="accordion-trigger" (click)="toggleSection('backpacking')" [class.open]="isOpen('backpacking')">
+              <span class="accordion-icon">🥾</span>
+              <span>Backpacking Gear</span>
+              <svg class="accordion-chevron" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            @if (isOpen('backpacking')) {
+              <div class="accordion-body">
+                <div class="gear-item-list">
+                  <div class="gear-row"><span class="gear-name">Tent</span><span class="gear-detail">2 lbs, 3-season &nbsp;<span class="price">$100–$300</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Lighting</span><span class="gear-detail">Headlamps + lightweight lantern &nbsp;<span class="price">$10–$150</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Sleeping Bag</span><span class="gear-detail">2 lbs, 20°, synthetic or water-resistant down &nbsp;<span class="price">$100–$400</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Sleeping Pad</span><span class="gear-detail">1 lb, insulated &nbsp;<span class="price">$50–$200</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Stove</span><span class="gear-detail">Jetboil — 1 per 4 people &nbsp;<span class="price">$79–$180</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Mess Kit</span><span class="gear-detail">Lightweight cup + Sea-To-Summit Summit Bowl XL + GSI Outdoors Spoon + fork &nbsp;<span class="price">~$40</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Knife</span><span class="gear-detail">2–3 inch jackknife, lightweight &nbsp;<span class="price">$15–$50</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Water Bottles</span><span class="gear-detail">1 liter, BPA-free plastic &nbsp;<span class="price">$8–$20</span></span></div>
+                  <div class="gear-row"><span class="gear-name">Backpack</span><span class="gear-detail">75L (Scouts) / 85L (Adults) &nbsp;<span class="price">$150–$450</span></span></div>
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- Tents -->
+          <div class="accordion-item">
+            <button class="accordion-trigger" (click)="toggleSection('tents')" [class.open]="isOpen('tents')">
+              <span class="accordion-icon">⛺</span>
+              <span>Tent &amp; Tent-Related Gear</span>
+              <svg class="accordion-chevron" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            @if (isOpen('tents')) {
+              <div class="accordion-body">
+                <p class="accordion-text">
+                  Unfortunately, there probably isn't a one-size-fits-all tent. A typical active
+                  scouting family may end up with a family camping tent, a 2 lb backpacking tent,
+                  and a 2-person tent for car camping with Boy Scouts. If you're on a budget,
+                  splurge on the lightweight backpacking tent (~$200) and go budget on the others.
+                </p>
+
+                <div class="tent-card">
+                  <h4>Cub Scout Family Camping <span class="tent-badge">2 adults + 2 kids</span></h4>
+                  <p>Get a tent you can stand up in with room for gear — size up 1–2 sizes from your headcount. For 4 people, a 5 or 6-person tent is ideal. Expect to pay $150+ at Big 5 or Walmart. With a bigger tent, you'll also want:</p>
+                  <ul class="info-list">
+                    <li>Doormat — to leave shoes on and wipe off dust</li>
+                    <li>Brush and dustpan</li>
+                    <li>Cots or queen-size air mattress</li>
+                    <li>Tent footprint</li>
+                  </ul>
+                </div>
+
+                <div class="tent-card">
+                  <h4>Bear through AOL &amp; Boy Scout Camping <span class="tent-badge">1 adult + 1 kid</span></h4>
+                  <p>
+                    Our Boy Scout troop provides tents for Scouts but not adults — and Boy Scouts and
+                    adults should not share a tent. Our Cub Scout Pack does not provide tents; Cub
+                    Scouts sleep with their parents. A 4-person tent fits both roles well — it can
+                    just barely fit a queen-size mattress and is small enough to carry several hundred
+                    yards. Expect to pay $50+.
+                  </p>
+                </div>
+              </div>
+            }
+          </div>
+
+          <!-- AOL Starter Gear -->
+          <div class="accordion-item">
+            <button class="accordion-trigger" (click)="toggleSection('aol')" [class.open]="isOpen('aol')">
+              <span class="accordion-icon">🏅</span>
+              <span>Starter Gear for AOLs Bridging to Scouts BSA</span>
+              <svg class="accordion-chevron" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </button>
+            @if (isOpen('aol')) {
+              <div class="accordion-body">
+                <p class="accordion-text">
+                  BSA has two types of campouts: some where moving gear from transportation to
+                  campsite is under half a mile (car camping), and some where you carry everything
+                  on your back (backpacking). New Scouts will spend their first few years mostly
+                  car camping. For beginners, get gear they can make mistakes with — when they
+                  start backpacking, they'll upgrade to higher-end gear.
+                </p>
+                <p class="accordion-text">Mandatory starter gear:</p>
+
+                <div class="gear-item-list">
+                  <div class="gear-row">
+                    <span class="gear-name">Sleeping Bag</span>
+                    <span class="gear-detail">20° rating, 4 lbs, ~1 cubic foot or smaller &nbsp;<span class="price">under $90</span></span>
+                  </div>
+                  <div class="gear-row">
+                    <span class="gear-name">Sleeping Pad</span>
+                    <span class="gear-detail">Must have an R-value (thermal resistance) rating. Folding foam type is 10× faster to set up and pack than inflatable &nbsp;<span class="price">under $60</span></span>
+                  </div>
+                  <div class="gear-row">
+                    <span class="gear-name">Water Bottle</span>
+                    <span class="gear-detail">Wide-mouth Nalgene — lasts forever, compatible with water filters &nbsp;<span class="price">under $15</span></span>
+                  </div>
+                  <div class="gear-row">
+                    <span class="gear-name">Duffel Bag</span>
+                    <span class="gear-detail">With removable shoulder strap — big enough to hold 3–4 sleeping bags &nbsp;<span class="price">under $40</span></span>
+                  </div>
+                  <div class="gear-row">
+                    <span class="gear-name">Hiking Boots</span>
+                    <span class="gear-detail">Ankle height, water-resistant preferred. Kids' feet grow fast — buy expecting 6 months of use</span>
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+
+        </div><!-- /accordion -->
+      </div><!-- /gear-guide -->
+
+    </section>
+  }
+
+  <!-- ── Sample Agenda ── -->
+  @if (activeTab() === 'agenda') {
+    <section class="tab-content">
+      <h2 class="section-title">Sample Agenda</h2>
+      <p>Here's a typical schedule for a Pack 541 family campout weekend.</p>
+      <div class="agenda-list">
+        <div class="agenda-item">
+          <div class="agenda-time">Friday</div>
+          <div class="agenda-events">
+            <div class="agenda-event"><strong>3:00–6:00 PM</strong> — Arrive, set up camp</div>
+            <div class="agenda-event"><strong>6:30 PM</strong> — Group dinner</div>
+            <div class="agenda-event"><strong>8:00 PM</strong> — Campfire, s'mores, songs, and stories</div>
+            <div class="agenda-event"><strong>9:30 PM</strong> — Lights out for younger Scouts</div>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-time">Saturday</div>
+          <div class="agenda-events">
+            <div class="agenda-event"><strong>7:30 AM</strong> — Breakfast</div>
+            <div class="agenda-event"><strong>9:00 AM</strong> — Den activities and badge work</div>
+            <div class="agenda-event"><strong>12:00 PM</strong> — Lunch</div>
+            <div class="agenda-event"><strong>1:00 PM</strong> — Hike or nature activity</div>
+            <div class="agenda-event"><strong>5:30 PM</strong> — Group dinner</div>
+            <div class="agenda-event"><strong>7:00 PM</strong> — Campfire ceremony and flag</div>
+          </div>
+        </div>
+        <div class="agenda-item">
+          <div class="agenda-time">Sunday</div>
+          <div class="agenda-events">
+            <div class="agenda-event"><strong>7:30 AM</strong> — Breakfast and site cleanup</div>
+            <div class="agenda-event"><strong>9:30 AM</strong> — Break camp and pack up</div>
+            <div class="agenda-event"><strong>11:00 AM</strong> — Head home</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  }
+
+</div>

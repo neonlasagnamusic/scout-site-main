@@ -1,0 +1,34 @@
+import { Routes } from '@angular/router';
+import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/about/about.component';
+import { JoiningComponent } from './pages/joining/joining.component';
+import { ActivitiesComponent } from './pages/activities/activities.component';
+import { AdultRolesComponent } from './pages/adult-roles/adult-roles.component';
+import { CampingBeginnersComponent } from './pages/camping-beginners/camping-beginners.component';
+import { ScoutingTipsComponent } from './pages/scouting-tips/scouting-tips.component';
+import { GalleryComponent } from './pages/gallery/gallery.component';
+import { UniformComponent } from './pages/uniform/uniform.component';
+import { ScoutRanksComponent } from './pages/scout-ranks/scout-ranks.component';
+import { VolunteersComponent } from './pages/volunteers/volunteers.component';
+import { GlossaryComponent } from './pages/glossary/glossary.component';
+import { ScoutResourcesComponent } from './pages/scout-resources/scout-resources.component';
+import { FundraisingComponent } from './pages/fundraising/fundraising.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'gallery', component: GalleryComponent },
+  { path: 'joining', component: JoiningComponent },
+  { path: 'campouts', component: ActivitiesComponent },
+  { path: 'fundraising', component: FundraisingComponent },
+  { path: 'adult-roles', component: AdultRolesComponent },
+  { path: 'camping-beginners', component: CampingBeginnersComponent },
+  { path: 'scouting-tips', component: ScoutingTipsComponent },
+  { path: 'uniform', component: UniformComponent },
+  { path: 'scout-ranks', component: ScoutRanksComponent },
+  { path: 'volunteers', component: VolunteersComponent },
+  { path: 'glossary', component: GlossaryComponent },
+  { path: 'scout-resources', component: ScoutResourcesComponent },
+  { path: '**', component: NotFoundComponent },
+];

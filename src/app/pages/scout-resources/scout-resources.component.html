@@ -1,0 +1,44 @@
+<div class="page-hero">
+  <h1>Scout Resources</h1>
+  <p>Helpful videos, guides, and links for new and returning scouting families.</p>
+</div>
+
+<div class="page-content">
+
+  <section class="resource-section">
+    <h2 class="section-title">Videos</h2>
+    <div class="video-grid">
+      @for (video of videos; track video.title) {
+        <div class="video-card">
+          <div class="video-wrapper">
+            <iframe
+              [src]="video.url"
+              [title]="video.title"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <p class="video-title">{{ video.title }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <section class="resource-section">
+    <h2 class="section-title">Links & Guides</h2>
+    <div class="resource-list">
+      @for (resource of resources; track resource.title) {
+        <a class="resource-card card" [href]="resource.href" target="_blank" rel="noopener">
+          <span class="resource-icon">{{ resource.icon }}</span>
+          <div class="resource-body">
+            <h3>{{ resource.title }}</h3>
+            <p>{{ resource.desc }}</p>
+          </div>
+          <span class="resource-arrow">↗</span>
+        </a>
+      }
+    </div>
+  </section>
+
+</div>

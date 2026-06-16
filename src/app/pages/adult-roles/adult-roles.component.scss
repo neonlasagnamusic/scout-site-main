@@ -1,0 +1,227 @@
+.info-section {
+  margin-bottom: 56px;
+
+  p { color: var(--text-mid); line-height: 1.8; margin-bottom: 16px; }
+}
+
+// ── Role cards ────────────────────────────────────────────────────────────────
+
+.role-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  .role-icon { font-size: 2rem; margin-bottom: 12px; }
+
+  h3 {
+    color: var(--scout-navy);
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--text-mid);
+    font-size: 0.9rem;
+    flex: 1;
+  }
+}
+
+.role-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 2px solid var(--scout-navy);
+  background: transparent;
+  color: var(--scout-navy);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+
+  &:hover {
+    background: var(--scout-navy);
+    color: white;
+  }
+}
+
+// ── Loading / error ───────────────────────────────────────────────────────────
+
+.loading-state {
+  text-align: center;
+  padding: 64px 24px;
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+.error-state {
+  background: rgba(190, 0, 0, 0.05);
+  border-left: 3px solid var(--scout-red);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 16px 20px;
+  color: var(--text-mid);
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+
+  a { color: var(--scout-navy); font-weight: 600; }
+}
+
+// ── Modal overlay ─────────────────────────────────────────────────────────────
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 24px;
+  animation: fade-in 0.15s ease;
+}
+
+.modal-panel {
+  background: var(--bg-white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 36px;
+  max-width: 540px;
+  width: 100%;
+  position: relative;
+  max-height: 82vh;
+  overflow-y: auto;
+  animation: slide-up 0.2s ease;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--text-light);
+  padding: 4px 8px;
+  border-radius: 4px;
+  line-height: 1;
+  transition: background 0.15s;
+
+  &:hover { background: var(--border-light); }
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  color: var(--scout-navy);
+  margin-bottom: 24px;
+  padding-right: 32px;
+}
+
+// ── Den leader list ───────────────────────────────────────────────────────────
+
+.den-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.den-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-light);
+  flex-wrap: wrap;
+
+  &:last-child { border-bottom: none; }
+}
+
+.den-label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--scout-navy);
+  min-width: 200px;
+  flex-shrink: 0;
+}
+
+.den-name {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+// ── Regular role entry ────────────────────────────────────────────────────────
+
+.regular-entry {
+  padding: 4px 0;
+}
+
+.entry-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+
+// ── Shared ────────────────────────────────────────────────────────────────────
+
+.vacant {
+  display: inline-block;
+  font-style: italic;
+  color: var(--text-light);
+  background: rgba(0, 63, 135, 0.06);
+  border-radius: 20px;
+  padding: 3px 12px;
+  font-size: 0.85rem;
+}
+
+.entry-notes {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.6;
+  margin-top: 8px;
+  flex-basis: 100%;
+}
+
+.modal-footer {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-light);
+  font-size: 0.875rem;
+  color: var(--text-mid);
+
+  a {
+    color: var(--scout-navy);
+    font-weight: 600;
+  }
+}
+
+// ── Training section ──────────────────────────────────────────────────────────
+
+.info-note {
+  font-size: 0.875rem;
+  background: rgba(0, 63, 135, 0.06);
+  border-left: 3px solid var(--scout-gold);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-mid) !important;
+  margin-top: 16px !important;
+}
+
+// ── Animations ────────────────────────────────────────────────────────────────
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 540px) {
+  .modal-panel { padding: 24px 20px; }
+  .den-label   { min-width: 0; width: 100%; }
+}

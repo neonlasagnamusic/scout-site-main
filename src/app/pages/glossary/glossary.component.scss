@@ -1,0 +1,29 @@
+.glossary-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0;
+}
+
+.glossary-entry {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border-light);
+
+  &:first-child {
+    border-top: 1px solid var(--border-light);
+  }
+}
+
+.glossary-term {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--scout-navy);
+  margin-bottom: 6px;
+}
+
+.glossary-def {
+  color: var(--text-mid);
+  line-height: 1.75;
+  margin: 0;
+}

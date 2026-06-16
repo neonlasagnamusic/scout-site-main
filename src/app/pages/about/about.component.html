@@ -1,0 +1,130 @@
+<div class="page-hero">
+  <h1>About Pack 541</h1>
+  <p>A volunteer-run Cub Scout pack serving families across Tustin and North Irvine since our founding.</p>
+</div>
+
+<div class="page-content">
+
+  <!-- Mission -->
+  <section class="about-section">
+    <h2 class="section-title">Who We Are</h2>
+    <div class="about-grid">
+      <div class="about-body">
+        <p>
+          Pack 541 is a Cub Scouts of America pack based in Tustin and North Irvine, California. We serve
+          families from PCE, Ladera, Hicks Canyon, TMA, Orchard Hills, and Tustin Ranch
+          Elementary schools.
+        </p>
+        <p>
+          We are entirely volunteer-run — every leader, event coordinator, and committee
+          member is a parent who gives their time because they believe in what scouting
+          does for kids. Our simple goal: help Scouts learn and experience new things.
+        </p>
+        <p>
+          Pack 541 is open to both girls and boys in Kindergarten through 5th grade.
+          No prior scouting experience is needed from parents or Scouts — we will
+          show you everything you need to know.
+        </p>
+        <a class="btn btn-primary" routerLink="/joining">Join the Pack</a>
+      </div>
+      <div class="about-stat-block">
+        <div class="stat">
+          <span class="stat-num">K–5</span>
+          <span class="stat-label">Grades Served</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">10</span>
+          <span class="stat-label">Local Schools</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2+</span>
+          <span class="stat-label">Campouts per Year</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">100%</span>
+          <span class="stat-label">Volunteer-Led</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="about-section">
+    <h2 class="section-title">Our Values</h2>
+    <div class="card-grid">
+      @for (v of values; track v.title) {
+        <div class="card value-card">
+          <div class="value-icon">{{ v.icon }}</div>
+          <h3>{{ v.title }}</h3>
+          <p>{{ v.desc }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Annual Events -->
+  <section class="about-section">
+    <h2 class="section-title">Annual Events</h2>
+    <p class="events-intro">We run a full calendar of events throughout the year. All events are family-friendly and most welcome siblings.</p>
+    <div class="events-grid">
+      @for (event of events; track event.id) {
+        <div class="event-card" [id]="event.id">
+          <div class="event-header">
+            <span class="event-icon">{{ event.icon }}</span>
+            <span class="tag">{{ event.season }}</span>
+          </div>
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.desc }}</p>
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Schools -->
+  <section class="about-section">
+    <h2 class="section-title">Schools We Serve</h2>
+    <p class="schools-intro">Pack 541 draws its members from the following Tustin and North Irvine-area elementary schools:</p>
+    <ul class="schools-list">
+      <li>Pioneer Christian Elementary</li>
+      <li>Ladera Elementary</li>
+      <li>Hicks Canyon Elementary</li>
+      <li>Tustin Memorial Academy (TMA)</li>
+      <li>Orchard Hills Elementary</li>
+      <li>Loma Vista Elementary</li>
+      <li>Arroyo Elementary</li>
+      <li>Red Hill Elementary</li>
+      <li>Guin Foss Elementary</li>
+      <li>Tustin Ranch Elementary</li>
+    </ul>
+    <p class="info-note">Not sure if your school is represented? Email us — all Tustin and Irvine families are welcome to inquire.</p>
+  </section>
+
+  <!-- Contact -->
+  <section class="about-section">
+    <h2 class="section-title">Get in Touch</h2>
+    <p>Have questions about Pack 541? Reach out and a leader will get back to you.</p>
+    <div class="contact-row">
+      <a class="contact-item" href="mailto:info@pack541.org">
+        <span class="contact-icon">✉️</span>
+        <div>
+          <strong>Email</strong>
+          <span>info&#64;pack541.org</span>
+        </div>
+      </a>
+      <a class="contact-item" href="https://www.instagram.com" target="_blank" rel="noopener">
+        <span class="contact-icon">📸</span>
+        <div>
+          <strong>Instagram</strong>
+          <span>Follow our adventures</span>
+        </div>
+      </a>
+      <a class="contact-item" href="https://www.facebook.com" target="_blank" rel="noopener">
+        <span class="contact-icon">👥</span>
+        <div>
+          <strong>Facebook</strong>
+          <span>Pack 541 community group</span>
+        </div>
+      </a>
+    </div>
+  </section>
+</div>

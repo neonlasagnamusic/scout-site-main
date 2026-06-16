@@ -1,0 +1,15 @@
+<div class="page-hero">
+  <h1>Glossary</h1>
+  <p>Common Cub Scouting terms and what they mean.</p>
+</div>
+
+<div class="page-content">
+  <dl class="glossary-list">
+    @for (entry of terms; track entry.term) {
+      <div class="glossary-entry">
+        <dt class="glossary-term">{{ entry.term }}</dt>
+        <dd class="glossary-def">{{ entry.definition }}</dd>
+      </div>
+    }
+  </dl>
+</div>

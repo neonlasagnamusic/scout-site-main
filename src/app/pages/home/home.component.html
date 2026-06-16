@@ -1,0 +1,103 @@
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">Tustin & North Irvine, California</div>
+    <h1>Welcome to<br><span class="gold">Pack 541</span></h1>
+    <p class="hero-sub">
+      We are volunteers with a simple goal: helping Scouts learn and experience
+      new things about the world.
+      <br><br>Anyone can be a Scout so both girls and boys are welcome.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" routerLink="/joining">Join the Pack</a>
+      <a class="btn btn-outline-white" routerLink="/campouts">See Our Activities</a>
+    </div>
+  </div>
+  <div class="hero-badge-wrap">
+    <img class="hero-fleur" src="images/logos/scout-white.png" alt="" aria-hidden="true" />
+  </div>
+</section>
+
+<!-- Intro Strip -->
+<section class="intro-strip">
+  <div class="strip-inner">
+    <div class="strip-item">
+      <strong>Grades K–5</strong>
+      <span>All elementary ages welcome</span>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-item">
+      <strong>Girls &amp; Boys</strong>
+      <span>Open to all Scouts</span>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-item">
+      <strong>Local Schools</strong>
+      <span>Serving the Tustin and Irvine community</span>
+    </div>
+    <div class="strip-divider"></div>
+    <div class="strip-item">
+      <strong>Volunteer-Led</strong>
+      <span>Parent-powered community</span>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about">
+  <div class="about-inner">
+    <div class="about-text">
+      <h2 class="section-title">Our Pack</h2>
+      <p>
+        Pack 541 serves families from PCE, Ladera, Hicks Canyon, TMA, Orchard Hills,
+        and Tustin Ranch Elementary schools. We believe scouting builds confidence,
+        teamwork, and lifelong memories — all while having a great time outdoors.
+      </p>
+      <p>
+        Our leaders are all volunteers — parents just like you — committed to making
+        each Scout year unforgettable. No experience required. We'll show you the ropes.
+      </p>
+    </div>
+    <div class="about-quote">
+      <blockquote>
+        "We are all volunteers with the simple goal of having our Scouts learn and
+        experience new things."
+      </blockquote>
+      <cite>— Pack 541 Leadership</cite>
+    </div>
+  </div>
+</section>
+
+<!-- Activities -->
+<section class="activities">
+  <div class="activities-inner">
+    <h2 class="section-title">What We Do</h2>
+    <p class="activities-sub">From campfires to car races, every month brings something new.</p>
+    <div class="activity-grid">
+      @for (act of activities; track act.title) {
+        <div class="activity-card">
+          <div class="activity-icon">{{ act.icon }}</div>
+          <h3>{{ act.title }}</h3>
+          <p>{{ act.desc }}</p>
+        </div>
+      }
+    </div>
+    <div class="activities-cta">
+      <a class="btn btn-primary" routerLink="/campouts">View All Activities</a>
+    </div>
+  </div>
+</section>
+
+<!-- Contact Banner -->
+<section class="contact-banner">
+  <div class="contact-inner">
+    <div>
+      <h2>Ready to get started?</h2>
+      <p>Reach out with any questions — we'd love to have your family join Pack 541.</p>
+    </div>
+    <div class="contact-actions">
+      <a class="btn btn-primary" href="mailto:info@pack541.org">Email Us</a>
+      <a class="btn btn-outline-white" routerLink="/joining">Learn More</a>
+    </div>
+  </div>
+</section>

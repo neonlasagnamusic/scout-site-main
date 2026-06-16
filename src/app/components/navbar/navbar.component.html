@@ -1,0 +1,88 @@
+<nav class="navbar" [class.scrolled]="scrolled()">
+  <div class="navbar-inner">
+
+    <!-- Brand -->
+    <a class="brand" routerLink="/" (click)="closeMobile()">
+      <img class="brand-fleur" src="images/logos/scout-white.png" alt="Pack 541 logo" />
+      <span class="brand-text">
+        <span class="brand-pack">Pack 541</span>
+        <span class="brand-loc">Tustin, CA</span>
+      </span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="nav-links">
+      @for (item of navItems; track item.label) {
+        <li class="nav-item" [class.has-dropdown]="item.children">
+          @if (!item.children) {
+            <a class="nav-link" [routerLink]="item.path" routerLinkActive="active"
+               [routerLinkActiveOptions]="{exact: item.path === '/'}">
+              {{ item.label }}
+            </a>
+          } @else {
+            <a class="nav-link dropdown-toggle" [routerLink]="item.path" routerLinkActive="active"
+               [routerLinkActiveOptions]="{exact: false}">
+              {{ item.label }}
+              <svg class="chevron" viewBox="0 0 10 6" fill="none">
+                <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+            </a>
+            <div class="dropdown-menu">
+              @for (child of item.children; track child.label) {
+                <a class="dropdown-item" [routerLink]="child.path" [fragment]="child.fragment">
+                  {{ child.label }}
+                </a>
+              }
+            </div>
+          }
+        </li>
+      }
+    </ul>
+
+    <!-- CTA -->
+    <a class="cta-btn" routerLink="/joining" (click)="closeMobile()">How to Join</a>
+
+    <!-- Hamburger -->
+    <button class="hamburger" (click)="toggleMobile()" [class.open]="mobileOpen()" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-overlay" [class.visible]="mobileOpen()" (click)="closeMobile()"></div>
+<aside class="mobile-drawer" [class.open]="mobileOpen()">
+  <div class="mobile-header">
+    <span class="brand-pack">Pack 541</span>
+    <button class="mobile-close" (click)="closeMobile()" aria-label="Close menu">✕</button>
+  </div>
+  <ul class="mobile-nav">
+    @for (item of navItems; track item.label) {
+      <li>
+        @if (!item.children) {
+          <a class="mobile-link" [routerLink]="item.path" (click)="closeMobile()">{{ item.label }}</a>
+        } @else {
+          <button class="mobile-link mobile-toggle" (click)="toggleDropdown(item.label)">
+            {{ item.label }}
+            <svg class="chevron" [class.rotated]="activeDropdown() === item.label" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </button>
+          @if (activeDropdown() === item.label) {
+            <ul class="mobile-sub">
+              @for (child of item.children; track child.label) {
+                <li>
+                  <a class="mobile-sub-link" [routerLink]="child.path" [fragment]="child.fragment" (click)="closeMobile()">
+                    {{ child.label }}
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+        }
+      </li>
+    }
+  </ul>
+  <a class="mobile-cta" routerLink="/joining" (click)="closeMobile()">How to Join</a>
+</aside>

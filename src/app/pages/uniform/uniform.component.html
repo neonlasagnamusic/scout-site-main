@@ -1,0 +1,125 @@
+<div class="page-hero">
+  <h1>Scout Uniforms</h1>
+  <p>A guide to what each rank wears and where everything goes.</p>
+</div>
+
+<div class="page-content">
+
+  <section class="uniform-intro">
+    <h2 class="section-title">Why the Uniform Matters</h2>
+    <p>
+      The Scout uniform is more than just clothing — it represents membership in a worldwide
+      movement and creates a sense of belonging and pride. Wearing the uniform correctly to
+      meetings and events is part of being a Scout.
+    </p>
+    <p>
+      Uniforms are available at your local Scout Shop or at
+      <a href="https://www.scoutshop.org" target="_blank" rel="noopener">scoutshop.org</a>.
+      Ask your den leader if you have questions about patches or exact placement.
+    </p>
+  </section>
+
+  <!-- Rank uniform cards -->
+  <section class="uniforms-section">
+    <h2 class="section-title">Uniforms by Rank</h2>
+
+    <div class="uniforms-list">
+      @for (u of uniforms; track u.rank) {
+        <div class="uniform-card">
+
+          <div class="uniform-image-wrap" (click)="openLightbox(u.image, u.rank + ' uniform')">
+            <img [src]="u.image" [alt]="u.rank + ' uniform'" class="uniform-img" />
+            <div class="expand-overlay">
+              <span class="expand-icon">&#x2922;</span>
+              <span class="expand-label">Click to expand</span>
+            </div>
+          </div>
+
+          <div class="uniform-details">
+            <h3>{{ u.rank }}</h3>
+            <ul class="info-list">
+              @for (item of u.items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- Patch placement -->
+  <section class="patch-section">
+    <h2 class="section-title">General Patch Placement Tips</h2>
+    <div class="card-grid">
+      <div class="card">
+        <h3>Left Sleeve</h3>
+        <ul class="info-list">
+          <li>Council shoulder patch at the top</li>
+          <li>Pack numeral (541) below council patch</li>
+          <li>Den numeral below pack numeral</li>
+          <li>National Honor Patrol (if earned) below den numeral</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Right Sleeve</h3>
+        <ul class="info-list">
+          <li>American flag patch at the top</li>
+          <li>Earned activity patches below the flag</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Left Pocket</h3>
+        <ul class="info-list">
+          <li>Current rank badge centered on the pocket flap</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Right Pocket</h3>
+        <ul class="info-list">
+          <li>Religious emblem (if earned)</li>
+          <li>World Friendship patch (if earned)</li>
+        </ul>
+      </div>
+    </div>
+    <p class="info-note">
+      When in doubt, bring the shirt to a den meeting — leaders are happy to help with patch placement.
+    </p>
+  </section>
+
+</div>
+
+<!-- Lightbox -->
+@if (lightboxSrc()) {
+  <div class="lb-backdrop"
+       (click)="onBackdropClick($event)"
+       (wheel)="onWheel($event)"
+       (mousedown)="onMouseDown($event)"
+       (touchstart)="onTouchStart($event)"
+       (touchmove)="onTouchMove($event)"
+       (touchend)="onTouchEnd()">
+
+    <!-- Controls -->
+    <div class="lb-controls">
+      <button class="lb-btn" (click)="zoomIn()"    title="Zoom in">＋</button>
+      <button class="lb-btn" (click)="zoomOut()"   title="Zoom out">－</button>
+      <button class="lb-btn" (click)="resetZoom()" title="Reset">&#x21BA;</button>
+      <button class="lb-btn lb-close" (click)="closeLightbox()" title="Close">✕</button>
+    </div>
+
+    <!-- Hint -->
+    <div class="lb-hint">Scroll to zoom &nbsp;·&nbsp; Drag to pan &nbsp;·&nbsp; Click outside to close</div>
+
+    <!-- Image -->
+    <img
+      class="lb-img"
+      [src]="lightboxSrc()!"
+      [alt]="lightboxAlt()"
+      [style.transform]="imgTransform"
+      [style.cursor]="isDragging ? 'grabbing' : 'grab'"
+      draggable="false"
+    />
+
+  </div>
+}
