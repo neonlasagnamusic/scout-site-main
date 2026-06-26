@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -7,7 +7,25 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
+  carouselImages = [
+    'images/carousel/_DSC7317 treated_photo_CSBC.jpg',
+    'images/carousel/_DSC7941 treated_photo_CSBC.jpg',
+  ];
+
+  activeIndex = signal(0);
+  private intervalId?: ReturnType<typeof setInterval>;
+
+  ngOnInit() {
+    this.intervalId = setInterval(() => {
+      this.activeIndex.update(i => (i + 1) % this.carouselImages.length);
+    }, 5000);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
+
   activities = [
     { icon: '⛺', title: 'Family Campouts', desc: 'At least 2 overnight campouts per year with the whole family.' },
     { icon: '🏅', title: 'Pinewood Derby', desc: 'The classic car-building race that kids (and parents!) love.' },
