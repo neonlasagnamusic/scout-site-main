@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-glossary',
   imports: [],
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './glossary.component.scss'
 })
 export class GlossaryComponent {
+  
   terms = [
     {
       term: 'Arrow of Light',

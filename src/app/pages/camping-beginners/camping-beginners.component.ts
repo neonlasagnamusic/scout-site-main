@@ -1,7 +1,6 @@
 import { Component, signal } from '@angular/core';
+import { Tab, GearSection } from '../../shared/models/camping-beginners.model';
 
-type Tab = 'cooking' | 'gear' | 'agenda';
-type GearSection = 'family' | 'backpacking' | 'tents' | 'aol';
 
 @Component({
   selector: 'app-camping-beginners',
@@ -10,6 +9,7 @@ type GearSection = 'family' | 'backpacking' | 'tents' | 'aol';
   styleUrl: './camping-beginners.component.scss'
 })
 export class CampingBeginnersComponent {
+  
   activeTab = signal<Tab>('cooking');
 
   tabs: { id: Tab; label: string; icon: string }[] = [
@@ -19,6 +19,10 @@ export class CampingBeginnersComponent {
   ];
 
   openSections = signal<Set<GearSection>>(new Set());
+
+  constructor() {
+    
+  }
 
   setTab(tab: Tab) {
     this.activeTab.set(tab);

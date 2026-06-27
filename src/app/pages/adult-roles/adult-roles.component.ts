@@ -1,26 +1,7 @@
-import { Component, HostListener, OnInit, inject } from '@angular/core';
-import { RolesService, RoleEntry } from '../../services/roles.service';
-
-interface ModalEntry {
-  label: string;
-  name: string;
-  notes: string;
-}
-
-export interface ModalData {
-  title: string;
-  isDenLeader: boolean;
-  entries: ModalEntry[];
-}
-
-interface RoleCard {
-  title: string;
-  type: string;
-  icon: string;
-  description: string;
-  isDenLeader: boolean;
-  modal: ModalData;
-}
+import { Component, HostListener, computed, inject, signal } from '@angular/core';
+import { RolesStore } from '../../shared/stores/roles.store';
+import { RoleEntry } from '../../shared/models/roles.model';
+import { ModalData, RoleCard } from '../../shared/models/adult-roles.model';
 
 @Component({
   selector: 'app-adult-roles',
@@ -28,14 +9,16 @@ interface RoleCard {
   templateUrl: './adult-roles.component.html',
   styleUrl: './adult-roles.component.scss'
 })
-export class AdultRolesComponent implements OnInit {
-  private rolesService = inject(RolesService);
+export class AdultRolesComponent {
+  private store = inject(RolesStore);
 
-  loading = true;
-  error = false;
-  leadershipCards: RoleCard[] = [];
-  volunteerCards: RoleCard[] = [];
-  activeModal: ModalData | null = null;
+  isLoading = this.store.isLoading;
+  hasError = this.store.error;
+  activeModal = signal<ModalData | null>(null);
+
+  private allCards = computed(() => this.buildCards(this.store.roles()));
+  leadershipCards = computed(() => this.allCards().filter(c => c.type.toLowerCase() === 'leadership'));
+  volunteerCards = computed(() => this.allCards().filter(c => c.type.toLowerCase() !== 'leadership'));
 
   private readonly roleMeta: { match: string; icon: string; description: string }[] = [
     { match: 'assistant cubmaster', icon: '⭐', description: 'Supports the Cubmaster in leading the pack and steps in during pack meetings and events when needed.' },
@@ -52,20 +35,8 @@ export class AdultRolesComponent implements OnInit {
     { match: 'webmaster',           icon: '💻', description: 'Maintains the pack website and digital presence. Updates event info and coordinates with leaders on announcements.' }
   ];
 
-  ngOnInit(): void {
-    this.rolesService.getRoles().subscribe({
-      next: entries => {
-        this.buildCards(entries);
-        this.loading = false;
-      },
-      error: () => {
-        this.error = true;
-        this.loading = false;
-      }
-    });
-  }
-
-  private buildCards(entries: RoleEntry[]): void {
+  private buildCards(entries: RoleEntry[]): RoleCard[] {
+    
     const denEntries = entries.filter(e => e.position.toLowerCase().startsWith('den leader'));
     const otherEntries = entries.filter(e => !e.position.toLowerCase().startsWith('den leader'));
 
@@ -104,8 +75,7 @@ export class AdultRolesComponent implements OnInit {
       });
     }
 
-    this.leadershipCards = cards.filter(c => c.type.toLowerCase() === 'leadership');
-    this.volunteerCards  = cards.filter(c => c.type.toLowerCase() !== 'leadership');
+    return cards;
   }
 
   private getMetaFor(position: string): { icon: string; description: string } {
@@ -117,12 +87,12 @@ export class AdultRolesComponent implements OnInit {
   }
 
   openModal(card: RoleCard): void {
-    this.activeModal = card.modal;
+    this.activeModal.set(card.modal);
     document.body.style.overflow = 'hidden';
   }
 
   closeModal(): void {
-    this.activeModal = null;
+    this.activeModal.set(null);
     document.body.style.overflow = '';
   }
 

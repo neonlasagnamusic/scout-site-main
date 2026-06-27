@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-home',
@@ -7,7 +9,40 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnDestroy {
+  
+  private http = inject(HttpClient);
+
+  carouselImages = signal<string[]>([]);
+  activeIndex = signal(0);
+  exitingIndex = signal(-1);
+
+  private intervalId?: ReturnType<typeof setInterval>;
+
+  constructor(){
+
+  }
+  
+  ngOnInit() {
+    this.http.get<string[]>('images/carousel/manifest.json').subscribe(images => {
+      this.carouselImages.set(images);
+      this.startCarousel();
+    });
+  }
+
+  private startCarousel() {
+    this.intervalId = setInterval(() => {
+      const total = this.carouselImages().length;
+      if (total < 2) return;
+      this.exitingIndex.set(this.activeIndex());
+      this.activeIndex.update(i => (i + 1) % total);
+    }, 5500);
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
+
   activities = [
     { icon: '⛺', title: 'Family Campouts', desc: 'At least 2 overnight campouts per year with the whole family.' },
     { icon: '🏅', title: 'Pinewood Derby', desc: 'The classic car-building race that kids (and parents!) love.' },

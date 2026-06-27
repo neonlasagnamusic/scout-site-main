@@ -1,12 +1,15 @@
 {
-  "name": "pack541",
+  "name": "pack-541",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
+    "prestart": "node scripts/generate-carousel-manifest.js",
     "start": "ng serve",
+    "prebuild": "node scripts/generate-carousel-manifest.js",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -17,6 +20,7 @@
     "@angular/platform-browser": "^19.2.0",
     "@angular/platform-browser-dynamic": "^19.2.0",
     "@angular/router": "^19.2.0",
+    "@ngrx/signals": "^19.2.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

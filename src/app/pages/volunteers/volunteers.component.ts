@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-volunteers',
   imports: [],
@@ -7,6 +8,7 @@ import { Component } from '@angular/core';
   styleUrl: './volunteers.component.scss'
 })
 export class VolunteersComponent {
+  
   roles = [
     { icon: '📋', label: 'Committee Member' },
     { icon: '🦅', label: 'Den Leader' },
