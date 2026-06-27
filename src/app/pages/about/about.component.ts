@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { PackEvent } from '../../shared/models/about.model';
 
-interface PackEvent {
-  id: string;
-  title: string;
-  icon: string;
-  season: string;
-  desc: string;
-}
 
 @Component({
   selector: 'app-about',
@@ -16,6 +10,7 @@ interface PackEvent {
   styleUrl: './about.component.scss'
 })
 export class AboutComponent {
+  
   values = [
     { icon: '🤝', title: 'Volunteer-Led', desc: 'Every leader is a parent volunteer — no paid staff, just dedicated families.' },
     { icon: '🌍', title: 'Gender Inclusive', desc: 'Girls and boys of all backgrounds are welcome. Anyone can be a Scout.' },

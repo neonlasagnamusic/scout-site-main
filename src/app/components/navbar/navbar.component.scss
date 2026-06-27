@@ -150,14 +150,14 @@
   }
 }
 
-/* Right-align dropdown for the last nav item so it doesn't overflow the viewport */
-.nav-item:last-child .dropdown-menu {
+/* Right-align dropdown for the second-to-last nav item so it doesn't overflow the viewport */
+.nav-item:nth-last-child(2) .dropdown-menu {
   left: auto;
   right: 0;
   transform: translateY(-6px);
 }
 
-.nav-item:last-child:hover .dropdown-menu {
+.nav-item:nth-last-child(2):hover .dropdown-menu {
   transform: translateY(0);
 }
 

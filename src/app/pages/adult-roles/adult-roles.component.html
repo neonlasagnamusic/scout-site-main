@@ -5,25 +5,25 @@
 
 <div class="page-content">
 
-  @if (loading) {
+  @if (isLoading()) {
     <div class="loading-state">Loading roles…</div>
   }
 
-  @if (error) {
+  @if (hasError()) {
     <div class="error-state">
       Unable to load role information right now. Please try again later or contact
       <a href="mailto:info@pack541.org">info&#64;pack541.org</a>.
     </div>
   }
 
-  @if (!loading && !error) {
+  @if (!isLoading() && !hasError()) {
 
-    @if (leadershipCards.length) {
+    @if (leadershipCards().length) {
       <section class="info-section">
         <h2 class="section-title">Leadership</h2>
         <p>Our adult leaders hold official BSA positions and complete required training. No prior scouting experience needed — just a willingness to help.</p>
         <div class="card-grid">
-          @for (card of leadershipCards; track card.title) {
+          @for (card of leadershipCards(); track card.title) {
             <div class="card role-card">
               <div class="role-icon">{{ card.icon }}</div>
               <h3>{{ card.title }}</h3>
@@ -37,12 +37,12 @@
       </section>
     }
 
-    @if (volunteerCards.length) {
+    @if (volunteerCards().length) {
       <section class="info-section">
         <h2 class="section-title">Volunteer Roles</h2>
         <p>Beyond formal leadership positions, these roles keep the pack organized and connected day-to-day.</p>
         <div class="card-grid">
-          @for (card of volunteerCards; track card.title) {
+          @for (card of volunteerCards(); track card.title) {
             <div class="card role-card">
               <div class="role-icon">{{ card.icon }}</div>
               <h3>{{ card.title }}</h3>
@@ -72,15 +72,15 @@
 
 </div>
 
-@if (activeModal) {
-  <div class="modal-overlay" (click)="closeModal()" role="dialog" aria-modal="true" [attr.aria-label]="activeModal.title">
+@if (activeModal()) {
+  <div class="modal-overlay" (click)="closeModal()" role="dialog" aria-modal="true" [attr.aria-label]="activeModal()!.title">
     <div class="modal-panel" (click)="$event.stopPropagation()">
       <button class="modal-close" (click)="closeModal()" aria-label="Close">✕</button>
-      <h2 class="modal-title">{{ activeModal.title }}</h2>
+      <h2 class="modal-title">{{ activeModal()!.title }}</h2>
 
-      @if (activeModal.isDenLeader) {
+      @if (activeModal()!.isDenLeader) {
         <div class="den-list">
-          @for (entry of activeModal.entries; track entry.label) {
+          @for (entry of activeModal()!.entries; track entry.label) {
             <div class="den-row">
               <span class="den-label">{{ entry.label }}</span>
               @if (entry.name) {
@@ -95,7 +95,7 @@
           }
         </div>
       } @else {
-        @for (entry of activeModal.entries; track $index) {
+        @for (entry of activeModal()!.entries; track $index) {
           <div class="regular-entry">
             @if (entry.name) {
               <p class="entry-name">{{ entry.name }}</p>

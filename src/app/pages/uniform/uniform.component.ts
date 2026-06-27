@@ -1,5 +1,6 @@
 import { Component, HostListener, signal } from '@angular/core';
 
+
 @Component({
   selector: 'app-uniform',
   imports: [],
@@ -7,6 +8,7 @@ import { Component, HostListener, signal } from '@angular/core';
   styleUrl: './uniform.component.scss'
 })
 export class UniformComponent {
+  
   uniforms = [
     {
       rank: 'Tiger (Grade 1)',

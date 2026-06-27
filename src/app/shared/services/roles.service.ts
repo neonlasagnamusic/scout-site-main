@@ -1,21 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { RoleEntry } from '../models/roles.model';
 
-export interface RoleEntry {
-  position: string;
-  name: string;
-  type: string;
-  email: string;
-  notes: string;
-}
 
 @Injectable({ providedIn: 'root' })
 export class RolesService {
+
   private http = inject(HttpClient);
 
   private readonly csvUrl =
     'https://docs.google.com/spreadsheets/d/e/2PACX-1vSO18SXf0sGiqaxen9kAtUmptlEiQdzoTTAhUfggiDqifalAIU9NhX08yC9VrPlMUcKsvNEEVjfI52_/pub?output=csv';
+
+  constructor() {
+
+  }
 
   getRoles(): Observable<RoleEntry[]> {
     return this.http.get(this.csvUrl, { responseType: 'text' }).pipe(
@@ -24,6 +23,7 @@ export class RolesService {
   }
 
   private parseCsv(csv: string): RoleEntry[] {
+  
     const lines = csv.split('\n').map(l => l.trim()).filter(l => l.length > 0);
 
     const headerIndex = lines.findIndex(l =>
@@ -37,10 +37,10 @@ export class RolesService {
       .filter(cells => cells.length >= 1 && cells[0].length > 0)
       .map(cells => ({
         position: cells[0] ?? '',
-        name:     cells[1] ?? '',
-        type:     cells[2] ?? '',
-        email:    cells[3] ?? '',
-        notes:    cells[4] ?? ''
+        name: cells[1] ?? '',
+        type: cells[2] ?? '',
+        email: cells[3] ?? '',
+        notes: cells[4] ?? ''
       }));
   }
 

@@ -1,23 +1,18 @@
-<div class="top-section">
-
-</div><!-- Hero Carousel -->
+<!-- Hero Carousel -->
 <section class="hero-carousel">
   <div class="carousel-slides">
-    @for (img of carouselImages; track img; let i = $index) {
-      <div class="carousel-slide" [class.active]="i === activeIndex()">
-        <img [src]="img" alt="Pack 541 Scouts" />
+    @for (img of carouselImages(); track img; let i = $index) {
+      <div class="carousel-slide"
+           [class.active]="i === activeIndex()"
+           [class.exiting]="i === exitingIndex()">
+        <img [src]="'images/carousel/' + img" alt="Pack 541 Scouts" />
       </div>
     }
   </div>
   <div class="carousel-overlay"></div>
   <div class="carousel-content">
-    <div class="hero-badge">Tustin &amp; North Irvine, California</div>
+        <div class="hero-badge">Tustin &amp; North Irvine, California</div>
     <h1>Welcome to<br><span class="gold">Pack 541</span></h1>
-    <p class="hero-sub">
-      We are volunteers with a simple goal: helping Scouts learn and experience
-      new things about the world.
-      <br><br>Anyone can be a Scout so both girls and boys are welcome.
-    </p>
   </div>
   <div class="hero-badge-wrap" aria-hidden="true">
     <img class="hero-fleur" src="images/logos/scout-white.png" alt="" />
@@ -26,8 +21,18 @@
 
 <!-- Hero Actions -->
 <div class="hero-actions-bar">
+  <div class>
+        <p class="hero-sub">
+      We are volunteers with a simple goal: 
+      Helping Scouts learn and experience
+      new things about the world.
+      <br><br>Anyone can be a Scout so both girls and boys are welcome.
+    </p>
+  </div>
+  <div class="hero-actions-buttons">
   <a class="btn btn-primary" routerLink="/joining">Join the Pack</a>
   <a class="btn btn-outline-white" routerLink="/campouts">See Our Activities</a>
+  </div>
 </div>
 
 <!-- Intro Strip -->

@@ -6,4 +6,9 @@ import { Component } from '@angular/core';
   templateUrl: './activities.component.html',
   styleUrl: './activities.component.scss'
 })
-export class ActivitiesComponent {}
+export class ActivitiesComponent {
+
+  constructor(){
+    
+  }
+}

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-gallery',
   imports: [],
@@ -7,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './gallery.component.scss'
 })
 export class GalleryComponent {
+  
   placeholders = Array(9).fill(null);
 }

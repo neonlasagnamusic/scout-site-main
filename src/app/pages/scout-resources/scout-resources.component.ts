@@ -1,17 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Video, Resource } from '../../shared/models/scout-resources.model';
 
-interface Video {
-  title: string;
-  url: SafeResourceUrl;
-}
-
-interface Resource {
-  icon: string;
-  title: string;
-  desc: string;
-  href: string;
-}
 
 @Component({
   selector: 'app-scout-resources',
@@ -20,6 +10,7 @@ interface Resource {
   styleUrl: './scout-resources.component.scss'
 })
 export class ScoutResourcesComponent {
+  
   private sanitizer = inject(DomSanitizer);
 
   videos: Video[] = [

@@ -1,12 +1,7 @@
 import { Component, HostListener, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-interface NavItem {
-  label: string;
-  path: string;
-  children?: { label: string; path: string; fragment?: string }[];
-}
+import { NavItem } from '../../shared/models/navbar.model';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +10,7 @@ interface NavItem {
   styleUrl: './navbar.component.scss'
 })
 export class NavbarComponent {
+  
   mobileOpen = signal(false);
   activeDropdown = signal<string | null>(null);
   scrolled = signal(false);
@@ -23,10 +19,9 @@ export class NavbarComponent {
     { label: 'Home', path: '/' },
     { label: 'Activities', path: '/campouts' },
     { label: 'Fundraising', path: '/fundraising' },
-    { label: 'Gallery', path: '/gallery' },
-    { label: 'About', path: '/about' },
+    // { label: 'Gallery', path: '/gallery' },
     {
-      label: 'Guides & Resources', path: '/camping-beginners',
+      label: 'Guides & Resources', path: '/scout-resources',
       children: [
         { label: 'Scout Resources', path: '/scout-resources' },
         { label: 'Uniform Guide', path: '/uniform' },
@@ -37,23 +32,28 @@ export class NavbarComponent {
         { label: 'Glossary', path: '/glossary' }
       ]
     },
+    { label: 'About', path: '/about' },
   ];
 
+  constructor() {
+
+  }
+
   @HostListener('window:scroll')
-  onScroll() {
+  onScroll(): void {
     this.scrolled.set(window.scrollY > 16);
   }
 
-  toggleMobile() {
+  toggleMobile(): void {
     this.mobileOpen.update(v => !v);
     if (this.mobileOpen()) this.activeDropdown.set(null);
   }
 
-  toggleDropdown(label: string) {
+  toggleDropdown(label: string): void {
     this.activeDropdown.update(v => v === label ? null : label);
   }
 
-  closeMobile() {
+  closeMobile(): void {
     this.mobileOpen.set(false);
     this.activeDropdown.set(null);
   }

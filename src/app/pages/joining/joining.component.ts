@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+
 @Component({
   selector: 'app-joining',
   imports: [RouterLink],
@@ -8,6 +9,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './joining.component.scss'
 })
 export class JoiningComponent {
+  
   steps: { num: string; title: string; desc: string; link?: { label: string; url: string; internal?: boolean } }[] = [
     { num: '1', title: 'Reach Out', desc: 'Email us at info@pack541.org or attend a school recruitment event. We\'ll answer any questions and invite you to a pack meeting.' },
     { num: '2', title: 'Attend a Meeting', desc: 'Come to one of our pack or den meetings as a guest. Meet the leaders, other scouts, and get a feel for how we run things.' },
