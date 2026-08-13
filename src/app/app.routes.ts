@@ -13,6 +13,7 @@ import { VolunteersComponent } from './pages/volunteers/volunteers.component';
 import { GlossaryComponent } from './pages/glossary/glossary.component';
 import { ScoutResourcesComponent } from './pages/scout-resources/scout-resources.component';
 import { FundraisingComponent } from './pages/fundraising/fundraising.component';
+import { FundraiserDetailComponent } from './pages/fundraiser-detail/fundraiser-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
@@ -22,6 +23,7 @@ export const routes: Routes = [
   { path: 'joining', component: JoiningComponent },
   { path: 'campouts', component: ActivitiesComponent },
   { path: 'fundraising', component: FundraisingComponent },
+  { path: 'fundraising/:id', component: FundraiserDetailComponent },
   { path: 'adult-roles', component: AdultRolesComponent },
   { path: 'camping-beginners', component: CampingBeginnersComponent },
   { path: 'scouting-tips', component: ScoutingTipsComponent },

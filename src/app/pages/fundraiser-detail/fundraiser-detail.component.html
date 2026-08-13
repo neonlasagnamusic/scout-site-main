@@ -1,0 +1,163 @@
+@if (isLoading()) {
+  <div class="page-content">
+    <div class="loading-state">Loading fundraiser…</div>
+  </div>
+}
+
+@if (!isLoading() && hasError()) {
+  <div class="page-content">
+    <div class="error-state">
+      Unable to load fundraiser information right now. Please try again later or contact
+      <a href="mailto:info@pack541.org">info&#64;pack541.org</a>.
+    </div>
+  </div>
+}
+
+@if (!isLoading() && !hasError()) {
+  @if (fundraiser(); as f) {
+    <div class="page-hero">
+      <a class="hero-back-btn" routerLink="/fundraising" aria-label="Back to Fundraisers">&#8592;</a>
+
+      <div class="hero-heading-group">
+        <div class="hero-left">
+          <div class="hero-text">
+            @if (isActive()) {
+              <span class="active-chip-hero">Active</span>
+            }
+            <h1>{{ f.name }}</h1>
+          </div>
+          @if (isActive()) {
+            <div class="hero-timeline">
+              <div class="timeline-flag" [style.left.%]="timePercent()">
+                <span class="flag-label">Today</span>
+                <div class="flag-pointer"></div>
+              </div>
+              <div class="timeline-track">
+                <div class="timeline-elapsed" [style.width.%]="timePercent()"></div>
+                <div class="timeline-pip" [style.left.%]="timePercent()"></div>
+              </div>
+              <div class="timeline-labels">
+                <span>{{ formatDate(f.startDate) }}</span>
+                <span>{{ formatDate(f.endDate) }}</span>
+              </div>
+              <p class="timeline-summary">
+                {{ daysIn() }} {{ daysIn() === 1 ? 'day' : 'days' }} in
+                &nbsp;·&nbsp;
+                {{ daysRemaining() }} {{ daysRemaining() === 1 ? 'day' : 'days' }} to go
+              </p>
+            </div>
+          } @else if (isPast()) {
+            <p class="hero-date-status">
+              Concluded on <strong>{{ formatDate(f.endDate) }}</strong>
+            </p>
+          } @else if (isUpcoming()) {
+            <p class="hero-date-status">
+              Will begin on <strong>{{ formatDate(f.startDate) }}</strong>
+            </p>
+          }
+        </div>
+        @if (!isUpcoming()) {
+          <div class="stat-box-wrapper">
+            @if (isGoalMet()) {
+              <div class="fireworks-rel" aria-hidden="true">
+                <span style="--x: 15%; --delay: 0s;   --dur: 2.8s">🎆</span>
+                <span style="--x: 35%; --delay: 0.5s; --dur: 2.4s">🎉</span>
+                <span style="--x: 55%; --delay: 1.0s; --dur: 2.7s">✨</span>
+                <span style="--x: 75%; --delay: 1.5s; --dur: 2.5s">🎆</span>
+                <span style="--x: 25%; --delay: 0.3s; --dur: 3.0s">🎉</span>
+                <span style="--x: 60%; --delay: 1.9s; --dur: 2.3s">✨</span>
+              </div>
+            }
+            <div class="fundraiser-stat-box" [class.goal-met]="isGoalMet()">
+              <div class="stat-inner">
+                <div class="stat-left">
+                  <span class="stat-label">Total Raised</span>
+                  <span class="stat-value">{{ f.currentTotal | currency:'USD':'symbol':'1.0-0' }}</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-right">
+                  <span class="stat-label">Goal</span>
+                  <span class="goal-amount">{{ f.goal | currency:'USD':'symbol':'1.0-0' }}</span>
+                </div>
+              </div>
+              <div class="stat-progress-track">
+                <div class="stat-progress-fill" [style.width.%]="progressPercent()"></div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <section class="info-section">
+        <h2 class="section-title">About This Fundraiser</h2>
+        <p>{{ f.description }}</p>
+      </section>
+
+      @if (isActive()) {
+        <section class="info-section">
+          <h2 class="section-title">Progress</h2>
+          <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="progressPercent()" aria-valuemin="0" aria-valuemax="100">
+            <div class="progress-fill" [style.width.%]="progressPercent()"></div>
+          </div>
+          <div class="progress-footer">
+            <p class="progress-label">{{ f.currentTotal | currency:'USD':'symbol':'1.0-0' }} raised</p>
+            @if (isGoalMet()) {
+              <span class="goal-achieved">Goal Achieved!</span>
+            } @else {
+              <span class="goal-marker-label">Goal: {{ f.goal | currency:'USD':'symbol':'1.0-0' }}</span>
+            }
+          </div>
+        </section>
+      }
+
+      <section class="info-section">
+        <h2 class="section-title">Details</h2>
+        <dl class="detail-list">
+          <div class="detail-row">
+            <dt>Start Date</dt>
+            <dd>{{ formatDate(f.startDate) || '—' }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>End Date</dt>
+            <dd>{{ formatDate(f.endDate) || '—' }}</dd>
+          </div>
+          <div class="detail-row">
+            <dt>Goal</dt>
+            <dd>{{ f.goal | currency:'USD':'symbol':'1.0-0' }}</dd>
+          </div>
+          @if (!isUpcoming()) {
+            <div class="detail-row">
+              <dt>Raised So Far</dt>
+              <dd>{{ f.currentTotal | currency:'USD':'symbol':'1.0-0' }}</dd>
+            </div>
+          }
+          <div class="detail-row">
+            <dt>Reward</dt>
+            <dd>{{ f.reward || '—' }}</dd>
+          </div>
+          @if (f.topFundraiser) {
+            <div class="detail-row">
+              <dt>Top Fundraiser</dt>
+              <dd>{{ f.topFundraiser }}</dd>
+            </div>
+          }
+        </dl>
+      </section>
+
+      <a class="btn btn-secondary" routerLink="/fundraising">← Back to Fundraisers</a>
+
+    </div>
+
+  } @else {
+    <div class="page-hero">
+      <h1>Fundraiser Not Found</h1>
+      <p>We couldn't find that fundraiser.</p>
+    </div>
+    <div class="page-content">
+      <a class="btn btn-secondary" routerLink="/fundraising">← Back to Fundraisers</a>
+    </div>
+  }
+}

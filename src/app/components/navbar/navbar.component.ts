@@ -28,7 +28,7 @@ export class NavbarComponent {
         { label: 'Scout Rank Requirements', path: '/scout-ranks' },
         { label: 'Camping for Beginners', path: '/camping-beginners' },
         { label: 'Adult Roles', path: '/adult-roles' },
-        { label: 'Volunteers', path: '/volunteers' },
+        { label: 'Volunteering', path: '/volunteers' },
         { label: 'Glossary', path: '/glossary' }
       ]
     },

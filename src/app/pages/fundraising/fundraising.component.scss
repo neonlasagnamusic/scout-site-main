@@ -1,3 +1,196 @@
+/* ── Hero heading group ─────────────────────────────────────── */
+// Mobile: stack and center
+.hero-heading-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+
+  // Desktop: 3-column symmetric grid keeps text truly centered.
+  // [1fr empty] [auto: text] [1fr: stat box]
+  // Both outer columns consume equal space, so the auto center
+  // column sits at the mathematical center of the hero.
+  @media (min-width: 769px) {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+
+    .hero-text { grid-column: 2; }
+    .hero-stat  { grid-column: 3; margin-left: 5rem; justify-self: start; }
+  }
+}
+
+.hero-text {
+  h1 { margin-bottom: 12px; }
+}
+
+/* ── Hero stat ─────────────────────────────────────────────── */
+.hero-stat {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: stretch;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.stat-left {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+
+  .stat-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
+  }
+
+  .stat-value {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--scout-gold);
+    line-height: 1;
+  }
+}
+
+.stat-divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 10px 0;
+  flex-shrink: 0;
+}
+
+.stat-right {
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .year-num {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.4rem;
+    font-weight: 800;
+    color: white;
+    opacity: 0.22;
+    line-height: 1;
+  }
+}
+
+/* ── Active fundraiser bar ──────────────────────────────────── */
+.active-section {
+  margin-bottom: 48px;
+}
+
+.active-title {
+  color: var(--scout-gold-dark) !important;
+  border-color: var(--scout-gold) !important;
+}
+
+.active-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: var(--bg-white);
+  border: 2px solid var(--scout-gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-md);
+  padding: 20px 24px;
+  margin-top: 16px;
+
+  .active-icon {
+    font-size: 2.5rem;
+    flex-shrink: 0;
+  }
+
+  .active-info {
+    flex: 1;
+    min-width: 0;
+
+    h3 {
+      color: var(--scout-navy);
+      margin-bottom: 4px;
+    }
+
+    .active-dates {
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 10px;
+    }
+  }
+
+  .active-btn {
+    flex-shrink: 0;
+  }
+}
+
+.progress-bar {
+  position: relative;
+  width: 100%;
+  height: 10px;
+  background: rgba(0, 63, 135, 0.14);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 6px;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 5px;
+    background: var(--scout-navy);
+    opacity: 0.5;
+    z-index: 0;
+  }
+}
+
+.progress-fill {
+  position: relative;
+  height: 100%;
+  background: var(--scout-gold);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+  z-index: 1;
+}
+
+.progress-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.progress-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-mid);
+}
+
+.goal-achieved {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--scout-navy);
+  white-space: nowrap;
+}
+
+.goal-marker-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+/* ── Fundraiser cards ───────────────────────────────────────── */
 .info-section {
   margin-bottom: 56px;
 
@@ -6,9 +199,117 @@
 
 .fundraiser-card {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
   .fundraiser-icon { font-size: 2rem; margin-bottom: 12px; }
 
   h3 { color: var(--scout-navy); margin-bottom: 8px; }
-  p  { color: var(--text-mid); font-size: 0.9rem; }
+  p  { color: var(--text-mid); font-size: 0.9rem; flex: 1; }
+
+  .fundraiser-btn {
+    margin-top: 16px;
+    align-self: center;
+  }
+}
+
+/* ── Active chip (card) ─────────────────────────────────────── */
+.active-chip {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, 0.12);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  color: #15803d;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  &::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #22c55e;
+    animation: chip-pulse 1.8s ease-in-out infinite;
+  }
+}
+
+@keyframes chip-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.75); }
+}
+
+.concluded-chip {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(100, 116, 139, 0.1);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  color: #475569;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  &::before {
+    content: '✓';
+    font-size: 0.65rem;
+  }
+}
+
+.upcoming-chip {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  color: #2563eb;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+
+  &::before {
+    content: '◷';
+    font-size: 0.75rem;
+  }
+}
+
+.loading-state,
+.error-state {
+  padding: 24px 0;
+  color: var(--text-mid);
+}
+
+.error-state { color: var(--scout-red); }
+
+/* ── Responsive ─────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .active-card {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .active-btn { align-self: stretch; text-align: center; justify-content: center; }
+  }
 }

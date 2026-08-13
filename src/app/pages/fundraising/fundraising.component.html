@@ -1,34 +1,92 @@
 <div class="page-hero">
-  <h1>Fundraising</h1>
-  <p>Pack 541's fundraisers support campouts, badges, and pack equipment — keeping costs manageable for every family.</p>
+  <div class="hero-heading-group">
+    <div class="hero-text">
+      <h1>Fundraising</h1>
+      <p>Pack 541's fundraisers support campouts, badges, and pack equipment keeping costs manageable for every family.</p>
+    </div>
+    @if (!isLoading()) {
+      <div class="hero-stat">
+        <div class="stat-left">
+          <span class="stat-label">Total Raised</span>
+          <span class="stat-value">{{ totalRaised() | currency:'USD':'symbol':'1.0-0' }}</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-right">
+          <span class="year-num">{{ scoutingYearStart }}</span>
+          <span class="year-num">{{ scoutingYearEnd }}</span>
+        </div>
+      </div>
+    }
+  </div>
 </div>
 
 <div class="page-content">
 
+  @if (!isLoading() && !hasError() && activeFundraisers().length > 0) {
+    <section class="active-section">
+      <h2 class="section-title active-title">Active Now</h2>
+      @for (f of activeFundraisers(); track f.id) {
+        <div class="active-card">
+          <div class="active-icon">{{ f.icon }}</div>
+          <div class="active-info">
+            <h3>{{ f.name }}</h3>
+            <p class="active-dates">Ends in {{ daysUntilEnd(f) }} {{ daysUntilEnd(f) === 1 ? 'day' : 'days' }} ({{ f.endDate | date:'MMMM d, y' }})</p>
+            <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="progressFor(f)" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-fill" [style.width.%]="progressFor(f)"></div>
+            </div>
+            <div class="progress-footer">
+              <p class="progress-label">{{ f.currentTotal | currency:'USD':'symbol':'1.0-0' }} raised</p>
+              @if (progressFor(f) >= 100) {
+                <span class="goal-achieved">Goal Achieved!</span>
+              } @else {
+                <span class="goal-marker-label">Goal: {{ f.goal | currency:'USD':'symbol':'1.0-0' }}</span>
+              }
+            </div>
+          </div>
+          <a class="btn btn-primary active-btn" [routerLink]="['/fundraising', f.id]">View Details</a>
+        </div>
+      }
+    </section>
+  }
+
   <section class="info-section">
     <h2 class="section-title">Our Fundraisers</h2>
     <p>Over the years we've run a variety of fundraisers. Every dollar raised goes directly back into pack programming.</p>
-    <div class="card-grid">
 
-      <div class="card fundraiser-card">
-        <div class="fundraiser-icon">🍿</div>
-        <h3>Digital Popcorn Fundraiser</h3>
-        <p>Our annual online popcorn sale through Trail's End. Scouts share a personal storefront link with family and friends to place orders directly — no door-to-door required.</p>
+    @if (isLoading()) {
+      <div class="loading-state">Loading fundraisers…</div>
+    }
+
+    @if (hasError()) {
+      <div class="error-state">
+        Unable to load fundraiser information right now. Please try again later or contact
+        <a href="mailto:info@pack541.org">info&#64;pack541.org</a>.
       </div>
+    }
 
-      <div class="card fundraiser-card">
-        <div class="fundraiser-icon">🏡</div>
-        <h3>Community Garage Sale</h3>
-        <p>A pack-organized community garage sale where families donate items and proceeds go directly to pack programming. A great way to declutter and support Scouting at the same time.</p>
+    @if (!isLoading() && !hasError()) {
+      <div class="card-grid">
+        @for (fundraiser of fundraisers(); track fundraiser.id) {
+          <div class="card fundraiser-card">
+            @if (activeIds().has(fundraiser.id)) {
+              <span class="active-chip">Active</span>
+            } @else if (pastIds().has(fundraiser.id)) {
+              <span class="concluded-chip">Concluded</span>
+            } @else if (upcomingIds().has(fundraiser.id)) {
+              <span class="upcoming-chip">Upcoming</span>
+            }
+            <div class="fundraiser-icon">{{ fundraiser.icon }}</div>
+            <h3>{{ fundraiser.name }}</h3>
+            <p>{{ fundraiser.description }}</p>
+            <a class="btn btn-secondary fundraiser-btn" [routerLink]="['/fundraising', fundraiser.id]">
+              View Details
+            </a>
+          </div>
+        } @empty {
+          <p>No fundraisers to show right now — check back soon!</p>
+        }
       </div>
-
-      <div class="card fundraiser-card">
-        <div class="fundraiser-icon">🍫</div>
-        <h3>See's Candy Fundraiser</h3>
-        <p>Seasonal candy sales featuring See's Candies products — a favorite around the holidays. Scouts take orders from neighbors, family, and coworkers and deliver when the order arrives.</p>
-      </div>
-
-    </div>
+    }
   </section>
 
 </div>

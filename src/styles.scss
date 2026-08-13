@@ -25,6 +25,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: default;
+}
+
+a, button, [role="button"], summary, label[for],
+input[type="checkbox"], input[type="radio"], select {
+  cursor: pointer;
+}
+
+input:not([type="checkbox"]):not([type="radio"]), textarea, [contenteditable="true"] {
+  cursor: text;
 }
 
 html {
@@ -57,7 +67,8 @@ a {
 
 /* Shared page layout */
 .page-hero {
-  background: linear-gradient(135deg, var(--scout-navy) 0%, #005bb5 100%);
+  position: relative;
+  background: linear-gradient(135deg, #004a9e 0%, #005bb5 100%);
   color: white;
   padding: 64px 24px 48px;
   text-align: center;
