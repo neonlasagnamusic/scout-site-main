@@ -1,8 +1,20 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, computed, inject } from '@angular/core';
+import { Component, HostListener, OnInit, computed, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Fundraiser } from '../../shared/models/fundraising.model';
 import { FundraisingStore } from '../../shared/stores/fundraising.store';
+
+/**
+ * Fundraising flyer settings.
+ * - src: path under public/ (e.g. 'images/fundraising/popcorn-2026.jpg'). Leave empty to hide the flyer entirely.
+ * - showOnPageLoad: true pops the flyer up when someone visits the page (once per browser session).
+ *   false (default) only shows it when the "View Flyer" button is clicked.
+ */
+const FUNDRAISING_FLYER = {
+  src: '',
+  alt: 'Pack 541 fundraiser flyer',
+  showOnPageLoad: false,
+};
 
 @Component({
   selector: 'app-fundraising',
@@ -10,8 +22,37 @@ import { FundraisingStore } from '../../shared/stores/fundraising.store';
   templateUrl: './fundraising.component.html',
   styleUrl: './fundraising.component.scss'
 })
-export class FundraisingComponent {
+export class FundraisingComponent implements OnInit {
   private store = inject(FundraisingStore);
+
+  readonly flyer = FUNDRAISING_FLYER;
+  showFlyer = signal(false);
+  // Keyed by image path so swapping in a new flyer pops up again even for visitors who dismissed the old one.
+  private readonly flyerDismissedKey = `pack541-fundraising-flyer-dismissed:${FUNDRAISING_FLYER.src}`;
+
+  ngOnInit(): void {
+    if (this.flyer.src && this.flyer.showOnPageLoad && !this.readDismissed()) {
+      this.showFlyer.set(true);
+    }
+  }
+
+  openFlyer(): void {
+    this.showFlyer.set(true);
+  }
+
+  closeFlyer(): void {
+    this.showFlyer.set(false);
+    try { sessionStorage.setItem(this.flyerDismissedKey, 'true'); } catch { /* storage unavailable */ }
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.showFlyer()) this.closeFlyer();
+  }
+
+  private readDismissed(): boolean {
+    try { return !!sessionStorage.getItem(this.flyerDismissedKey); } catch { return false; }
+  }
 
   fundraisers = this.store.fundraisers;
   activeFundraisers = this.store.activeFundraisers;

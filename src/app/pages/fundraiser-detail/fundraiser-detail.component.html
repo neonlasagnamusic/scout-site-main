@@ -94,6 +94,9 @@
       <section class="info-section">
         <h2 class="section-title">About This Fundraiser</h2>
         <p>{{ f.description }}</p>
+        @if (f.linkUrl) {
+          <p class="detail-external-link"><a class="external-link" [href]="f.linkUrl" target="_blank" rel="noopener noreferrer">{{ f.linkLabel }}<span class="external-link-icon" aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a></p>
+        }
       </section>
 
       @if (isActive()) {
