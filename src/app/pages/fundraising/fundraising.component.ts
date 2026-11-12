@@ -1,38 +1,40 @@
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { Component, HostListener, OnInit, computed, inject, signal } from '@angular/core';
+import { Component, computed, effect, inject, signal, untracked } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Fundraiser } from '../../shared/models/fundraising.model';
 import { FundraisingStore } from '../../shared/stores/fundraising.store';
+import { FlyerStore } from '../../shared/stores/flyer.store';
+import { FlyerModalComponent } from '../../components/flyer-modal/flyer-modal.component';
 
 /**
- * Fundraising flyer settings.
- * - src: path under public/ (e.g. 'images/fundraising/popcorn-2026.jpg'). Leave empty to hide the flyer entirely.
- * - showOnPageLoad: true pops the flyer up when someone visits the page (once per browser session).
- *   false (default) only shows it when the "View Flyer" button is clicked.
+ * true  → the flyer pops up automatically when someone visits the Fundraising page
+ *         (once per browser session), as long as a flyer exists and a fundraiser is active.
+ * false → (default) the flyer only opens from the "View Flyer" buttons.
+ * The flyer itself is public/images/fundraising/fundraising-flyer-active.(png|jpg|jpeg|gif|webp).
  */
-const FUNDRAISING_FLYER = {
-  src: '',
-  alt: 'Pack 541 fundraiser flyer',
-  showOnPageLoad: false,
-};
+const SHOW_FLYER_ON_PAGE_LOAD = false;
+const FLYER_DISMISSED_KEY = 'pack541-fundraising-flyer-dismissed';
 
 @Component({
   selector: 'app-fundraising',
-  imports: [RouterLink, CurrencyPipe, DatePipe],
+  imports: [RouterLink, CurrencyPipe, DatePipe, FlyerModalComponent],
   templateUrl: './fundraising.component.html',
   styleUrl: './fundraising.component.scss'
 })
-export class FundraisingComponent implements OnInit {
+export class FundraisingComponent {
   private store = inject(FundraisingStore);
 
-  readonly flyer = FUNDRAISING_FLYER;
+  flyerSrc = inject(FlyerStore).flyerSrc;
   showFlyer = signal(false);
-  // Keyed by image path so swapping in a new flyer pops up again even for visitors who dismissed the old one.
-  private readonly flyerDismissedKey = `pack541-fundraising-flyer-dismissed:${FUNDRAISING_FLYER.src}`;
 
-  ngOnInit(): void {
-    if (this.flyer.src && this.flyer.showOnPageLoad && !this.readDismissed()) {
-      this.showFlyer.set(true);
+  constructor() {
+    if (SHOW_FLYER_ON_PAGE_LOAD && !this.readDismissed()) {
+      // The flyer lookup and the sheet load are both async; pop up once both are ready.
+      effect(() => {
+        if (this.flyerSrc() && this.activeFundraisers().length > 0 && !this.readDismissed()) {
+          untracked(() => this.showFlyer.set(true));
+        }
+      });
     }
   }
 
@@ -42,16 +44,11 @@ export class FundraisingComponent implements OnInit {
 
   closeFlyer(): void {
     this.showFlyer.set(false);
-    try { sessionStorage.setItem(this.flyerDismissedKey, 'true'); } catch { /* storage unavailable */ }
-  }
-
-  @HostListener('document:keydown.escape')
-  onEscape(): void {
-    if (this.showFlyer()) this.closeFlyer();
+    try { sessionStorage.setItem(FLYER_DISMISSED_KEY, 'true'); } catch { /* storage unavailable */ }
   }
 
   private readDismissed(): boolean {
-    try { return !!sessionStorage.getItem(this.flyerDismissedKey); } catch { return false; }
+    try { return !!sessionStorage.getItem(FLYER_DISMISSED_KEY); } catch { return false; }
   }
 
   fundraisers = this.store.fundraisers;

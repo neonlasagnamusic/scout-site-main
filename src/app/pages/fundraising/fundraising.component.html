@@ -3,9 +3,6 @@
     <div class="hero-text">
       <h1>Fundraising</h1>
       <p>Pack 541's fundraisers support campouts, badges, and pack equipment keeping costs manageable for every family.</p>
-      @if (flyer.src) {
-        <button type="button" class="btn btn-outline-white flyer-btn" (click)="openFlyer()">View Flyer</button>
-      }
     </div>
     @if (!isLoading()) {
       <div class="hero-stat">
@@ -51,7 +48,12 @@
               }
             </div>
           </div>
-          <a class="btn btn-primary active-btn" [routerLink]="['/fundraising', f.id]">View Details</a>
+          <div class="active-actions">
+            <a class="btn btn-primary active-btn" [routerLink]="['/fundraising', f.id]">View Details</a>
+            @if (flyerSrc()) {
+              <button type="button" class="btn btn-secondary active-btn" (click)="openFlyer()">View Flyer</button>
+            }
+          </div>
         </div>
       }
     </section>
@@ -87,12 +89,14 @@
             <h3>{{ fundraiser.name }}</h3>
             <p>{{ fundraiser.description }}</p>
             <div class="fundraiser-actions">
+              <div class="fundraiser-link-slot">
+                @if (fundraiser.linkUrl) {
+                  <a class="external-link" [href]="fundraiser.linkUrl" target="_blank" rel="noopener noreferrer">{{ fundraiser.linkLabel }}<span class="external-link-icon" aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
+                }
+              </div>
               <a class="btn btn-secondary fundraiser-btn" [routerLink]="['/fundraising', fundraiser.id]">
                 View Details
               </a>
-              @if (fundraiser.linkUrl) {
-                <a class="external-link" [href]="fundraiser.linkUrl" target="_blank" rel="noopener noreferrer">{{ fundraiser.linkLabel }}<span class="external-link-icon" aria-hidden="true">↗</span><span class="visually-hidden"> (opens in a new tab)</span></a>
-              }
             </div>
           </div>
         } @empty {
@@ -105,11 +109,6 @@
 </div>
 
 <!-- Fundraising Flyer Modal -->
-@if (showFlyer()) {
-  <div class="flyer-overlay" (click)="closeFlyer()">
-    <div class="flyer-dialog" role="dialog" aria-modal="true" aria-label="Fundraiser flyer" (click)="$event.stopPropagation()">
-      <button type="button" class="flyer-close" (click)="closeFlyer()" aria-label="Close flyer">✕</button>
-      <img [src]="flyer.src" [alt]="flyer.alt" />
-    </div>
-  </div>
+@if (showFlyer() && flyerSrc(); as src) {
+  <app-flyer-modal [src]="src" (closed)="closeFlyer()" />
 }

@@ -138,8 +138,17 @@
     .external-link { margin-left: auto; }
   }
 
+  .active-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
   .active-btn {
     flex-shrink: 0;
+    justify-content: center;
+    text-align: center;
   }
 }
 
@@ -225,6 +234,23 @@
     align-items: center;
     gap: 10px;
     padding-top: 16px;
+  }
+
+  // Always rendered at a fixed height, empty or not, so View Details sits at the same spot on every card.
+  .fundraiser-link-slot {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 1.5rem;
+    max-width: 100%;
+
+    .external-link {
+      display: inline-block;
+      max-width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
   }
 }
 
@@ -324,74 +350,6 @@
     flex-direction: column;
     align-items: flex-start;
 
-    .active-btn { align-self: stretch; text-align: center; justify-content: center; }
+    .active-actions { align-self: stretch; }
   }
-}
-
-/* ── Flyer button + modal ───────────────────────────────────── */
-.flyer-btn {
-  margin-top: 16px;
-}
-
-.flyer-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 2000;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  animation: flyer-fade-in 0.25s ease-out;
-}
-
-.flyer-dialog {
-  position: relative;
-  max-width: 520px;
-  width: 100%;
-  max-height: 90vh;
-  animation: flyer-pop-in 0.25s ease-out;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-    max-height: 90vh;
-    object-fit: contain;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-  }
-}
-
-.flyer-close {
-  position: absolute;
-  top: -14px;
-  right: -14px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: none;
-  background: white;
-  color: var(--text-dark);
-  font-size: 0.95rem;
-  cursor: pointer;
-  box-shadow: var(--shadow-lg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s;
-
-  &:hover {
-    background: var(--scout-gold);
-  }
-}
-
-@keyframes flyer-fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-@keyframes flyer-pop-in {
-  from { opacity: 0; transform: scale(0.94); }
-  to { opacity: 1; transform: scale(1); }
 }
